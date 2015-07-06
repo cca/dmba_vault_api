@@ -9,7 +9,7 @@ Uses [Composer](https://getcomposer.org/) to manage the [Guzzle](https://guzzle3
 By default, the API just executes a search of the DMBA collection with all the default settings and returns a list of 10 items. Here are some parameters one can alter to obtain different results:
 
 - **semester**: limit the semester results are from, semesters are of form "(Spring|Fall|Summer) YYYY" e.g. `Spring 2015`
-- **length**: default `10`, number of results to return,
+- **length**: default `10`, number of results to return
 - **q**: free text query to execute, e.g. "venture financing"
 - **start**: default `0`, number of the first search result to return
 - **order**: ordering principle of the result list, defaults to VAULT's internal relevance ranking but can also be set to `modified` (date last modified), `name` (alphabetical by name), or `rating` (not used in DMBA collection)
