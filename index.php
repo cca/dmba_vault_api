@@ -11,7 +11,7 @@ define('SEARCH_API', '/api/search');
 $client = new Client(VAULT_URL, Array(
     'ssl.certificate_authority' => false
 ));
-// @todo any HTTP headers we need to specify here?
+// @TODO any HTTP headers we need to specify here?
 
 // construct query string for EQUELLA search API
 // parse_str parses a query string into variables inside $arr
@@ -71,7 +71,11 @@ foreach ($data['results'] as $item) {
 // contruct response
 // headers
 header('Content-Type: application/json');
-header("Cache-Control: no-cache, must-revalidate");
+header('Cache-Control: no-cache, must-revalidate');
+// enable CORS
+header('Access-Control-Allow-Origin: *');
+// no reason to broadcast our PHP version
+header_remove('X-Powered-By');
 
 if ($debug) {
     // send the raw EQUELLA response
