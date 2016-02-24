@@ -63,6 +63,9 @@ foreach ($data['results'] as $item) {
     $metadata = simplexml_load_string($item['metadata']);
     // remove noisy local/courseInfo/courseinfo node, taxonomy string
     unset($metadata->local->courseInfo->courseinfo);
+    // add students to metadata output, only piece outside local/courseInfo we need
+    // have to cast to string b/c PHP's XML interface is awkward
+    $output_item['students'] = (string) $metadata->local->courseWorkWrapper->groupMembers;
     // merge two data sources & append to our ouput
     // cast $metadata SimpleXMLElement to array
     $output['results'][] = array_merge($output_item, (array) $metadata->local->courseInfo);
