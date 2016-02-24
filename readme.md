@@ -12,14 +12,14 @@ By default, the API just executes a search of the DMBA collection with all the d
 - **length**: default `10`, number of results to return
 - **q**: free text query to execute, e.g. "venture financing"
 - **start**: default `0`, number of the first search result to return
-- **order**: ordering principle of the result list, defaults to VAULT's internal relevance ranking but can also be set to `modified` (date last modified), `name` (alphabetical by name), or `rating` (not used in DMBA collection)
+- **order**: ordering principle of the result list, defaults to VAULT's internal relevance ranking but can also be set to `modified` (date last modified) or `name` (alphabetical by name)
 - **reverse**: default `false`, whether results should be listed in reverse, set to `true` to override
 
 There is also a **debug** parameter which, when set to any value, causes the app to return the EQUELLA API response instead of its modified response. Useful for development purposes but probably not for API clients.
 
 ## Sample Response
 
-See also example.html in this folder, which shows how a JavaScript client might use the API. When I perform a `GET http://libraries.cca.edu/dmba/?q=money&semester=Spring+2015` HTTP request I see a sightly longer version of the following (I truncated some descriptions and removed 1 result):
+See also example.html in this folder, which shows how a JavaScript client might use the API. When I perform a `GET http://libraries.cca.edu/dmba/?q=money&semester=Spring+2015` HTTP request I see a sightly longer version of the following (I truncated the descriptions and removed results):
 
 ```js
 {
@@ -61,6 +61,7 @@ See also example.html in this folder, which shows how a JavaScript client might 
                 }
             }
         ],
+        "students": "Doe Johnson, Antonio Jackson,  Cerberus Hu, Xiu Zao, Mikhail Garbanzo ",
         "semester": "Spring 2015",
         "course": "Money Strategies",
         "faculty": "Steven Gilman",
@@ -102,6 +103,7 @@ See also example.html in this folder, which shows how a JavaScript client might 
                 }
             }
         ],
+        "students": "Ham Danish, Etsy Flourish, Dougie Wallace",
         "semester": "Spring 2015",
         "course": "Venture Studio",
         "faculty": "Robert Neher",
