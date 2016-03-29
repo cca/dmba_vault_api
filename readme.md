@@ -25,8 +25,9 @@ See also example.html in this folder, which shows how a JavaScript client might 
 {
     "vault_api_url": "https://vault.cca.edu/api/search?q=money&info=metadata%2Cbasic%2Cattachment&collections=70a86791-8453-4ad3-9906-f4e070621d05&where=%2Fxml%2Flocal%2FcourseInfo%2Fsemester%20%3D%20%27Spring%202015%27",
     "results": [{
+        "id": "1c1490b9-83e0-4c18-bc24-240674785048",
         "name": "Venture Financing Final Presentation and Paper",
-        "description": "It takes money to make money. Businesses need varying amounts of funds at different stages and for almost every process. In fact, the flow of funds itself is a process that needs money to maintain. In our study we looked at both sides of the coin -- what entrepreneurs/businesses can do to raise money, and what kind of investments might be valuable for investors to explore. \n\nAn investor is a person who allocates capital with the expectation of a future financial return. On the flip side, an entrepreneur is an individual who runs a small business and assumes all the risk and reward of a given business venture…",
+        "description": "It takes money to make money. Businesses need varying amounts of funds…",
         "link": "https://vault.cca.edu/items/1c1490b9-83e0-4c18-bc24-240674785048/1/",
         "attachments": [
             {
@@ -67,6 +68,7 @@ See also example.html in this folder, which shows how a JavaScript client might 
         "faculty": "Steven Gilman",
         "section": "DSMBA-632-1B"
     }, {
+        "id": "df14f1bb-39ae-4e45-84e3-6ce9dafa2542",
         "name": "GIFTD",
         "description": "GIFTD is a service that tailors great gift ideas to take the stress…",
         "link": "https://vault.cca.edu/items/df14f1bb-39ae-4e45-84e3-6ce9dafa2542/1/",
