@@ -53,6 +53,7 @@ $output = Array(
 foreach ($data['results'] as $item) {
     // basic info contained in API response
     $output_item = Array(
+        'id' => $item['uuid'],
         'name' => $item['name'],
         'description' => $item['description'],
         'link' => $item['links']['view'],
