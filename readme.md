@@ -2,7 +2,12 @@
 
 A wrapper around the VAULT API for the Design MBA program. Allows someone to interact with the DMBA materials in VAULT without knowing the internal workings of the system or our metadata schema. Live endpoint at http://libraries.cca.edu/dmba/
 
-Uses [Composer](https://getcomposer.org/) to manage the [Guzzle](https://guzzle3.readthedocs.org/http-client/client.html) HTTP library dependency. Run `composer install` to get set up.
+Uses [Composer](https://getcomposer.org/) to manage the [Guzzle](https://guzzle3.readthedocs.org/http-client/client.html) HTTP library dependency. To get set up:
+
+- run `composer install` to get dependencies
+- copy "collections.example.php" to "collections.php" & change it to the desired list of collect UUIDs
+
+You can test that it's working with `php -S 8000` which will run a local PHP server on port 8000.
 
 ## Request Parameters
 
