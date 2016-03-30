@@ -27,7 +27,7 @@ There is also a **debug** parameter which, when set to any value, causes the app
 
 For example JSON, see the section below and the "response.json" sample in this project.
 
-All API results return an object with just two properties, `vault_api_url` and `results`. The `vault_api_url` is a link back to the VAULT application's API (of which this API is an abstraction); client applications should not need to refer to it, it is present merely for troubleshooting purposes. The `results` property is an array of items matching the query parameters (see the section above for details on parameters).
+All API results return an object with just two properties, `vault_api_url` and `results`. The `vault_api_url` is a link back to the VAULT application's API (of which this API is an abstraction); client applications should not need to refer to it, it is present merely for troubleshooting purposes. The `results` property is an array of items matching the query parameters (see the _Request Parameters_ section above for details on parameters).
 
 Each item within the `results` array has the following properties:
 
@@ -42,6 +42,9 @@ Each item within the `results` array has the following properties:
 - a `faculty` string of comma-separated instructors' names
 - a `section` string which is the course section code, of a format matching the regular expression `[A-Z]{5}-[0-9]{3}-[A-Z0-9]{2}` e.g. "DSMBA-404-1A"
     + Note that there are multiple _sections_ of the same _course_, e.g. the DSMBA-608-1A and DMSBA-608-1B _sections_ are both instances of the _course_ "Venture Studio"
+- a `courseName` string which is merely the first 9 characters of the `section`, e.g. DMBA-608 (not present in all items)
+- a `facultyID` string which is a comma-separated list of the instructos' CCA usernames (not present in all items)
+- a `XList` string which is a numeric identifier linking "cross-listed" courses that appear under multiple programs (not present in all items)
 
 Each attachment within the `attachments` array has many properties, most of which are only important to VAULT itself and of dubious relevance to API clients. The properties which are most likely to be useful are:
 
