@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @param array options The parsed query string parameters.
+ * @return boolean|array errors Returns False if there are no errors, otherwise returns an array of error message strings.
+ */
+
 function validate ($options) {
     $errors = array();
 
