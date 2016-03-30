@@ -4,6 +4,7 @@
 require 'vendor/autoload.php';
 use Guzzle\Http\Client;
 require 'validate.php';
+require 'http_response_code.php';
 
 // constants
 define('VAULT_URL', 'https://vault.cca.edu');
