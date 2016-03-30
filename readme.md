@@ -11,7 +11,7 @@ By default, the API just executes a search of the DMBA collection with all the d
 - **semester**: limit the semester results are from, semesters are of form "(Spring|Fall|Summer) YYYY" e.g. `Spring 2015`
 - **q**: free text query over all metadata fields, e.g. "venture financing"
 - **id**: return _only_ the item with a specific ID (_this option ignores the 2 parameters above_)
-- **length**: default `10`, number of results to return
+- **length**: default `10`, number of results to return (_maximum 50_)
 - **start**: default `0`, number of the first search result to return
 - **order**: ordering principle of the result list, defaults to VAULT's internal relevance ranking but can also be set to `modified` (date last modified) or `name` (alphabetical by name)
 - **reverse**: default `false`, whether results should be listed in reverse, set to `true` to override
