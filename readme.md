@@ -1,22 +1,52 @@
 # VAULT API for Design MBA Program
 
-A wrapper around the EQUELLA (software that runs VAULT) API for the Design MBA program. Allows someone to interact with the files and metadata related to DMBA in VAULT without knowing the internal workings all that well. Live demo at http://libraries.cca.edu/dmba/
+A wrapper around the VAULT API for the Design MBA program. Allows someone to interact with the DMBA materials in VAULT without knowing the internal workings of the system or our metadata schema. Live endpoint at http://libraries.cca.edu/dmba/
 
 Uses [Composer](https://getcomposer.org/) to manage the [Guzzle](https://guzzle3.readthedocs.org/http-client/client.html) HTTP library dependency. Run `composer install` to get set up.
 
 ## Request Parameters
 
-By default, the API just executes a search of the DMBA collection with all the default settings and returns a list of 10 items. Here are some parameters one can alter to obtain different results:
+By default, the API just executes a search of the DMBA collection with all the default settings and returns a list of 10 items. Here are parameters that one can alter to obtain different results:
 
 - **semester**: limit the semester results are from, semesters are of form "(Spring|Fall|Summer) YYYY" e.g. `Spring 2015`
-- **q**: free text query to execute, e.g. "venture financing"
-- **id**: return _only_ the item with a specific ID, _note that this option ignores the above 2 parameters_
+- **q**: free text query over all metadata fields, e.g. "venture financing"
+- **id**: return _only_ the item with a specific ID (_this option ignores the 2 parameters above_)
 - **length**: default `10`, number of results to return
 - **start**: default `0`, number of the first search result to return
 - **order**: ordering principle of the result list, defaults to VAULT's internal relevance ranking but can also be set to `modified` (date last modified) or `name` (alphabetical by name)
 - **reverse**: default `false`, whether results should be listed in reverse, set to `true` to override
 
 There is also a **debug** parameter which, when set to any value, causes the app to return the EQUELLA API response instead of its modified response. Useful for development purposes but probably not for API clients.
+
+## Field Definitions & Information
+
+For example JSON, see the section below and the "response.json" sample in this project.
+
+All API results return an object with just two properties, `vault_api_url` and `results`. The `vault_api_url` is a link back to the VAULT application's API (of which this API is an abstraction); client applications should not need to refer to it, it is present merely for troubleshooting purposes. The `results` property is an array of items matching the query parameters (see the section above for details on parameters).
+
+Each item within the `results` array has the following properties:
+
+- a unique `id` string in [standard UUID format](https://en.wikipedia.org/wiki/Universally_unique_identifier)
+- a `name` string which is the title of the project
+- a longer `description` string which is in plain text but often a few paragraphs long, containing line breaks but no text formatting
+- a `link` URL for the item's summary page in VAULT
+- an `attachments` array that describes files associated with the item (see below for details on the properties of an attachment)
+- a `students` string which is a comma-separated list of student names
+- a `semester` string of format "(Spring|Summer|Fall) YYYY" where "YYYY" is the four-digit year
+- a `course` string which is the course title
+- a `faculty` string of comma-separated instructors' names
+- a `section` string which is the course section code, of a format matching the regular expression `[A-Z]{5}-[0-9]{3}-[A-Z0-9]{2}` e.g. "DSMBA-404-1A"
+    + Note that there are multiple _sections_ of the same _course_, e.g. the DSMBA-608-1A and DMSBA-608-1B _sections_ are both instances of the _course_ "Venture Studio"
+
+Each attachment within the `attachments` array has many properties, most of which are only important to VAULT itself and of dubious relevance to API clients. The properties which are most likely to be useful are:
+
+- a `type` string which is either "file" or "url" (meaning it's a URL of a resource not hosted in the VAULT archive)
+    + note that `type: "url"` attachments will not have the fields listed below but will have a `url` property that can be used to generate a link
+- a `filename` string which can be parsed for file extension (e.g. ".pdf") to get a clue as to what type of file the attachment is
+- a `size` integer which is the file size in bytes
+- a `links` hash with two string properties, `thumbnail` and `view` which respectively point to a small, system-generated thumbnail and the file itself
+
+Almost all of the other properties of attachments are uninformative, though it's perhaps worth noting that one can construct the thumbnail and resource URLs for a file given the parent item's ID and the file's `uuid` property.
 
 ## Sample Response
 
@@ -115,7 +145,7 @@ See also example.html in this folder, which shows how a JavaScript client might 
 }
 ```
 
-Note that a request with an `id` parameter will still return results as formatted above, but there is guaranteed to be only one item in the results array.
+Note that a request with an `id` parameter will return JSON as formatted above, but there is guaranteed to be only one item in the `results` array.
 
 ## License
 
