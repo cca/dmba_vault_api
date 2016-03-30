@@ -8,6 +8,8 @@ require 'validate.php';
 // constants
 define('VAULT_URL', 'https://vault.cca.edu');
 define('SEARCH_API', '/api/search');
+// this is the UUID for the Design Strategy (MBA) Program collection
+define('COLLECTION_IDS', '70a86791-8453-4ad3-9906-f4e070621d05')
 
 // HTTP headers
 header('Content-Type: application/json');
@@ -21,8 +23,8 @@ header_remove('X-Powered-By');
 // parse_str parses a query string into variables inside 2nd array parameter
 parse_str($_SERVER['QUERY_STRING'], $options);
 $options['info'] = 'metadata,basic,attachment';
-// search only the Design MBA Program collection (this is its UUID)
-$options['collections'] = '70a86791-8453-4ad3-9906-f4e070621d05';
+// search only specific collections, "all" here would search everything
+$options['collections'] = COLLECTION_IDS;
 
 $errors = validate($options);
 if ($errors) {
