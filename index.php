@@ -27,6 +27,17 @@ if (isset($options['semester'])) {
     $options['where'] = '/xml/local/courseInfo/semester = \'' . $semester . '\'';
 }
 
+// translate "id" parameter into XML where query
+// ignore all other query parameters
+if (isset($options['id'])) {
+    $id = $options['id'];
+    unset($options['id']);
+    // ignore any prior `where` or free text queries, ID specificity trumps all else
+    unset($options['where']);
+    unset($options['q']);
+    $options['where'] = '/xml/mods/recordInfo/recordIdentifier = \'' . $id . '\'';
+}
+
 // ignore "debug" which will return EQUELLA API response
 if (isset($options['debug'])) {
     $debug = true;
