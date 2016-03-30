@@ -9,7 +9,7 @@ require 'validate.php';
 define('VAULT_URL', 'https://vault.cca.edu');
 define('SEARCH_API', '/api/search');
 // this is the UUID for the Design Strategy (MBA) Program collection
-define('COLLECTION_IDS', '70a86791-8453-4ad3-9906-f4e070621d05')
+define('COLLECTION_IDS', '70a86791-8453-4ad3-9906-f4e070621d05');
 
 // HTTP headers
 header('Content-Type: application/json');
