@@ -3,22 +3,44 @@
 // https://guzzle3.readthedocs.org/docs.html
 require 'vendor/autoload.php';
 use Guzzle\Http\Client;
+require 'validate.php';
 
 // constants
 define('VAULT_URL', 'https://vault.cca.edu');
 define('SEARCH_API', '/api/search');
-// disable SSL validation since our cert causes an error
-$client = new Client(VAULT_URL, Array(
-    'ssl.certificate_authority' => false
-));
-// @TODO any HTTP headers we need to specify here?
+
+// HTTP headers
+header('Content-Type: application/json');
+header('Cache-Control: no-cache, must-revalidate');
+// enable CORS
+header('Access-Control-Allow-Origin: *');
+// no reason to broadcast our PHP version
+header_remove('X-Powered-By');
 
 // construct query string for EQUELLA search API
-// parse_str parses a query string into variables inside $arr
+// parse_str parses a query string into variables inside 2nd array parameter
 parse_str($_SERVER['QUERY_STRING'], $options);
 $options['info'] = 'metadata,basic,attachment';
 // search only the Design MBA Program collection (this is its UUID)
 $options['collections'] = '70a86791-8453-4ad3-9906-f4e070621d05';
+
+$errors = validate($options);
+if ($errors) {
+    // indicate HTTP error
+    http_response_code(400);
+
+    echo json_encode(array("errors" => $errors));
+    exit;
+}
+
+// initialize HTTP client
+$client = new Client(VAULT_URL, Array(
+    // disable SSL validation since our cert causes an error
+    'ssl.certificate_authority' => false
+));
+// @TODO any HTTP headers we need to specify here?
+
+// translate query parameters for EQUELLA
 
 // translate "semester" parameter into XML where query
 if (isset($options['semester'])) {
@@ -82,15 +104,6 @@ foreach ($data['results'] as $item) {
     // cast $metadata SimpleXMLElement to array
     $output['results'][] = array_merge($output_item, (array) $metadata->local->courseInfo);
 }
-
-// contruct response
-// headers
-header('Content-Type: application/json');
-header('Cache-Control: no-cache, must-revalidate');
-// enable CORS
-header('Access-Control-Allow-Origin: *');
-// no reason to broadcast our PHP version
-header_remove('X-Powered-By');
 
 if ($debug) {
     // send the raw EQUELLA response
