@@ -23,6 +23,21 @@ By default, the API just executes a search of the DMBA collection with all the d
 
 There is also a **debug** parameter which, when set to any value, causes the app to return the EQUELLA API response instead of its modified response. Useful for development purposes but probably not for API clients.
 
+## Invalid Queries
+
+Invalid queries will result in a HTTP 400 response with the following JSON structure:
+
+```js
+{
+    "errors" : [
+        "first error message",
+        "second error message"
+    ]
+}
+```
+
+The error messages should make it clear which parameters were used improperly. Consult the section above to determine how to fix the error(s).
+
 ## Field Definitions & Information
 
 For example JSON, see the section below and the "response.json" sample in this project.
