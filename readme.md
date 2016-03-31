@@ -57,7 +57,7 @@ Each item within the `results` array has the following properties:
 - a `faculty` string of comma-separated instructors' names
 - a `section` string which is the course section code, of a format matching the regular expression `[A-Z]{5}-[0-9]{3}-[A-Z0-9]{2}` e.g. "DSMBA-404-1A"
     + Note that there are multiple _sections_ of the same _course_, e.g. the DSMBA-608-1A and DMSBA-608-1B _sections_ are both instances of the _course_ "Venture Studio"
-- a `courseName` string which is merely the first 9 characters of the `section`, e.g. DMBA-608 (not present in all items)
+- a `courseName` string which is merely the first 9 characters of the `section`, e.g. DSMBA-608 (not present in all items)
 - a `facultyID` string which is a comma-separated list of the instructos' CCA usernames (not present in all items)
 - a `XList` string which is a numeric identifier linking "cross-listed" courses that appear under multiple programs (not present in all items)
 
