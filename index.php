@@ -23,7 +23,7 @@ header_remove('X-Powered-By');
 // construct query string for EQUELLA search API
 // parse_str parses a query string into variables inside 2nd array parameter
 parse_str($_SERVER['QUERY_STRING'], $options);
-$options['info'] = 'metadata,basic,attachment';
+$options['info'] = 'metadata,basic,attachment,detail';
 // search only specific collections, "all" here would search everything
 $options['collections'] = COLLECTION_IDS;
 
@@ -91,6 +91,8 @@ foreach ($data['results'] as $item) {
     $output_item = Array(
         'id' => $item['uuid'],
         'name' => $item['name'],
+        'createdDate' => $item['createdDate'],
+        'modifiedDate' => $item['modifiedDate'],
         'description' => $item['description'],
         'link' => $item['links']['view'],
         'attachments' => $item['attachments']
