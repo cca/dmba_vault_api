@@ -68,6 +68,8 @@ Each attachment within the `attachments` array has many properties, most of whic
 - a `filename` string which can be parsed for file extension (e.g. ".pdf") to get a clue as to what type of file the attachment is
 - a `size` integer which is the file size in bytes
 - a `links` hash with two string properties, `thumbnail` and `view` which respectively point to a small, system-generated thumbnail and the file itself
+    + thumbnails are 88x66 300dpi JPG images
+    + by appending a "?gallery=preview" query string to the thumbnail URL, one can obtain a larger thumbnail that's up to 500px in one dimension by varies in aspect ratio depending on the dimensions of the original image
 
 Almost all of the other properties of attachments are uninformative, though it's perhaps worth noting that one can construct the thumbnail and resource URLs for a file given the parent item's ID and the file's `uuid` property.
 
